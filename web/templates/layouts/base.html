@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="expires" content="43200"/>
+        <meta name="description" content="This is a typing speed test used for an experiment within my bachelor thesis"/>
+        <meta name="keywords" content="typing, test, speed, tt, philip, gaber, wpm, cpm, bachelor, thesis"/>
+        <meta name="author" content="Philip Gaber" />
+        <meta name="copyright" content="Philip Gaber" />
+        <title>TT</title>
+        <link href="/static/css/tt.css" rel="stylesheet"/>
+    </head>
+    <body>
+        {{block "header" .HeaderData}}{{end}}
+        <section id="content-wrapper">
+        {{block "body" .BodyData}}{{end}}
+        </section>
+    </body>
+    {{block "scripts" .BodyData}}{{end}}
+</html>

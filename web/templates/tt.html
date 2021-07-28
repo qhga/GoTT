@@ -1,0 +1,27 @@
+{{define "body"}}
+    <section id="tt-wrapper">
+        <div id="tt-timer-outer"><div id="tt-timer"></div></div>
+        <div id="tt-area-outer"><div id="tt-area"></div></div>
+
+        <div id="tt-result"></div>
+        <select id="tt-keyboard-selector" name="keyboard">
+            {{range $kb := .KB}}
+                <option value="{{$kb.KID}}">{{$kb.KID}}</option>
+            {{end}}
+        </select>
+        <select id="tt-typing-test-selector" name="tttid">
+            {{range $tttid := .TT}}
+                <option value="{{$tttid}}">{{$tttid}}</option>
+            {{end}}
+                <option value="random">Random</option>
+        </select>
+        <button id="tt-start-button" class="tt-button">START</button>
+        <div id="tt-info" class="hidden"></div>
+        <button id="tt-reset-button" class="tt-button">RESET</button>
+    </section>
+{{end}}
+
+{{define "scripts"}}
+    <script src="/static/js/tt.js"></script>
+    <script src="/static/js/helper.js"></script>
+{{end}}

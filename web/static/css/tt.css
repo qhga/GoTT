@@ -1,0 +1,473 @@
+/******************* DEFINITIONS *******************/
+@font-face {
+    font-family: "OpenSans";
+    src: url("../fonts/OpenSans-Regular.ttf");
+}
+:root {
+    --red: #b65058;
+    --blue: #a3d4d6;
+    --green: #8baf45;
+    --purple: #514a63;
+    --grey1: #fafafa;
+    --grey2: #f1f2f6;
+    --grey3: #d1d2d6;
+    --black: #292930;
+}
+
+/******************* GENERAL *******************/
+
+body {
+    font-family: "OpenSans", sans-serif;
+    color: var(--black);
+}
+span {
+    margin: none;
+    padding: none;
+}
+
+label, input[type=radio] {
+    cursor: pointer;
+}
+
+select, button {
+    text-transform: none;
+    border-radius: 4px;
+    border: none;
+    height: 40px;
+    margin: 0;
+    padding: 0 10px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 100%;
+    overflow: visible;
+    -webkit-appearance: button;
+    background: var(--grey2);
+}
+
+button:hover {
+    opacity: .8;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+textarea {
+    border-radius: 4px;
+    border: 2px solid var(--grey2);
+    box-sizing: border-box;
+    width: 100%;
+    margin: 5px 0;
+    padding: 4px 5px;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+    height: 35px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.tt-warning {
+    color: var(--red);
+}
+
+.tt-done {
+    background: var(--blue);
+}
+.tt-error {
+    color: var(--grey1);
+    background: var(--red);
+}
+
+.tt-success {
+    color: var(--black);
+    background: var(--green);
+}
+
+.tt-info {
+    background: var(--black);
+    color: var(--grey1);
+}
+
+.container {
+    width: 80%;
+    padding: 30px;
+    margin: 80px auto 0 auto;
+    background: var(--grey1);
+    border-radius: 4px;
+}
+
+form {
+    padding: 30px;
+    margin: 80px auto 0 auto;
+    background: var(--grey1);
+    border-radius: 4px;
+}
+
+#general-info {
+    position: relative;
+    bottom: 5px;
+    margin-left: -165px;
+    left: 50%;
+    line-height: 40px;
+    height: 40px;
+    width: 330px;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/******************* HEADER *******************/
+
+header {
+    width: 500px;
+    height: 30px;
+    margin: auto;
+    border-radius: 4px;
+    background: var(--grey1);
+    line-height: 30px;
+}
+
+nav {
+    width: 90%;
+    height: 100%;
+    text-align: justify;
+    margin: auto;
+}
+
+nav:after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+}
+
+nav * {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--black);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+nav > * {
+    opacity: .7;
+}
+
+nav > *:hover {
+    opacity: 1;
+}
+
+.dropdown {
+
+}
+
+.dropdown-main {
+}
+
+.dropdown-sub {
+    position: absolute;
+    padding: 0 8px;
+    z-index: 69;
+    display: none;
+    background: var(--grey1);
+    border-radius: 0 0 4px 4px;
+    filter: drop-shadow(-2px 2px 2px var(--grey2));
+}
+
+.dropdown-sub > a {
+    opacity: 0.7;
+}
+
+.dropdown-sub > a:hover {
+    opacity: 1;
+}
+
+.dropdown-sub > a {
+    display: block;
+}
+
+.dropdown:hover .dropdown-sub {
+    display: block;
+}
+
+
+/******************* TYPING TEST *******************/
+
+#tt-wrapper {
+    position: absolute;
+    width: 900px;
+    height: 500px;
+
+    margin-left: -450px;
+    left: 50%;
+    top: 100px;
+
+    /* border: solid 2px blue; */
+}
+
+#tt-area-outer {
+    overflow: hidden;
+    box-sizing: border-box;
+    position: absolute;
+    top: 29px;
+    width: 100%;
+    height: 306px;
+    padding: 2px 10px;
+
+    background: var(--grey1);
+    border-radius: 4px;
+}
+#tt-area {
+    font-size: 16px;
+    line-height: 25px;
+    white-space: pre-wrap;
+}
+
+#tt-timer {
+    position: relative;
+    width: 100%;
+    height: 21px;
+    background: var(--grey2);
+    border-radius: 2px;
+}
+
+#tt-timer-outer {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 2px;
+    background: var(--grey2);
+    border-radius: 4px;
+}
+
+#tt-result, #tt-keyboard-selector, #tt-typing-test-selector {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    background: var(--grey1);
+    border-radius: 4px;
+    bottom: 120px;
+    line-height: 40px;
+    text-align: center;
+}
+
+#tt-keyboard-selector, #tt-typing-test-selector {
+    padding-left: 10px;
+}
+
+#tt-typing-test-selector {
+    bottom: 75px;
+}
+
+.tt-button {
+    width: 100px;
+    position: absolute;
+    bottom: 25px;
+}
+
+#tt-start-button {
+    left: 10%;
+    background: var(--blue);
+}
+
+#tt-reset-button {
+    right: 10%;
+    background: var(--red);
+    color: var(--grey1);
+}
+
+#tt-info {
+    position: absolute;
+    bottom: 25px;
+    margin-left: -165px;
+    left: 50%;
+    line-height: 40px;
+    height: 40px;
+    width: 330px;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/******************* LOGIN *******************/
+
+#frm-login {
+    width: 400px;
+}
+
+#frm-login > * {
+    display: block;
+    width: 100%;
+}
+
+/******************* CONTRIBUTE TEXT *******************/
+
+#frm-contribute-text {
+    width: 600px;
+}
+
+#frm-contribute-text > * {
+    display: block;
+    width: 100%;
+}
+
+.fre-info {
+    font-size: 16px;
+    text-align: center;
+}
+
+
+/******************* CREATE USER (ADMIN) *******************/
+
+#frm-create-user {
+    width: 400px;
+}
+
+#frm-create-user > * {
+    display: block;
+    width: 100%;
+}
+
+#info-create-user {
+    line-height: 40px;
+    width: 400px;
+    margin: 20px auto 0 auto;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+#info-create-user table {
+    text-align: left;
+    border-spacing: 20px 5px;
+}
+
+/******************* SURVEY PAGE *******************/
+
+#frm-survey {
+    width: 600px;
+}
+
+#frm-survey input[type=radio] {
+    display: block;
+    width: 100%;
+    margin: 4px 0 0 1.5px;
+}
+
+.row-survey {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: no-wrap;
+    width: 90%;
+    margin: auto;
+}
+
+.col-survey {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    text-align: center;
+    padding: 0 10px;
+}
+
+#frm-survey h1 {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    text-transform: uppercase;
+    color: var(--purple);
+}
+
+
+#frm-survey h2 {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#frm-survey h3 {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#frm-survey button {
+    margin-top: 30px;
+    display: block;
+    width: 100%;
+}
+
+#general-info {
+    position: relative;
+    bottom: 5px;
+    margin-left: -165px;
+    left: 50%;
+    line-height: 40px;
+    height: 40px;
+    width: 330px;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/******************* QUESTION PAGE *******************/
+
+#frm-add-question {
+    width: 600px;
+}
+
+#frm-add-question > * {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-o-delete {
+    margin: 0 5px;
+    width: 30px;
+}
+
+#btn-o-add {
+    width: 30px;
+}
+
+#question-preview {
+    width: 600px;
+    padding: 5px 30px 30px 30px;
+    margin: 80px auto 0 auto;
+    background: var(--grey1);
+    border-radius: 4px;
+}
+
+
+/******************* QUESTION PAGE *******************/
+
+#tbl-results {
+    margin: auto;
+    text-align: center;
+    vertical-align: center;
+    border-collapse: collapse;
+}
+
+#tbl-results td, #tbl-results th {
+    padding: 15px 5px;
+    border-bottom: 1px solid var(--grey3);
+    border-left: 1px solid var(--grey3);
+    margin: 0;
+}
+
+#tbl-results td:first-child, #tbl-results th:first-child {
+    border-left: none;
+}

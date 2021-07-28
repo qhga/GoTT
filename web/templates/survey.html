@@ -1,0 +1,97 @@
+{{define "body"}}
+    <form id="frm-survey" method="post" action="/survey">
+        <h1>{{.SID}}</h1>
+        {{if eq .SID "post typing test survey" "post keyboard survey"}}
+            <input name="kid" type="hidden" value="{{.KID}}"/>
+            <h2 class="tt-warning">Questionnaire for keyboard: <i>{{.KID}}</i></h2>
+        {{end}}
+        {{- range .Questions}}
+            {{$qid := UnwrapOID .QID}}
+            <h3>{{.Qtext}}</h3>
+            <div class="row-survey">
+                {{- if .QlabelL}}
+                    <div class="col-survey">
+                        {{.QlabelL}}
+                    </div>
+                {{end}}
+                {{- if eq .Qtype "1"}}
+                    {{- range .QAnswers}}
+                        <div class="col-survey">
+                            <label for="{{$qid}}-{{.}}">{{.}}</label>
+                            <input name="{{$qid}}" id="{{$qid}}-{{.}}" type="radio" value="{{.}}" required/>
+                        </div>
+                    {{end}}
+                {{- else if eq .Qtype "2"}}
+                    <!-- Print checkbox survey -->
+                {{- else if eq .Qtype "3"}}
+                    <!-- Print textarea survey -->
+                    {{- range .QAnswers}}
+                        <div class="col-survey">
+                            <label for="{{$qid}}">{{.}}</label>
+                            <input name="{{$qid}}" id="{{$qid}}" type="text" required/>
+                        </div>
+                    {{end}}
+                {{- else if eq .Qtype "4"}}
+                    <div class="col-survey">
+                        <label for="{{$qid}}">{{index .QAnswers 0}}</label>
+                        <input name="{{$qid}}" id="{{$qid}}" type="range" min="{{.Qmin}}" max="{{.Qmax}}" step="{{.Qstep}}" value="" required/>
+                        <p class="range-info">Adjust here</p>
+                    </div>
+                {{end}}
+                {{- if .QlabelR}}
+                <div class="col-survey">
+                    {{.QlabelR}}
+                </div>
+                {{end}}
+            </div>
+        {{end}}
+        <button>SUBMIT</button>
+    </form>
+    <div class="hidden" id="general-info"></div>
+{{end}}
+{{define "scripts"}}
+    <script>
+     let survey = {};
+     survey.id  = {{.ID}};
+     survey.sid = {{.SID}};
+     survey.uid = {{.UID}};
+     survey.ttid = {{.TTID}};
+     survey.kid = {{.KID}};
+     survey.questions = {{.Questions}};
+
+     let frm = document.getElementById("frm-survey");
+     let infoBox = document.getElementById("general-info");
+
+     frm.addEventListener("submit", async e => {
+         e.preventDefault();
+         let data = new FormData(frm);
+         survey.questions.forEach((q, i) => {
+             q.answer = data.get(q.qid);
+         });
+
+         fetch("/survey", {
+             method: "POST",
+             body: JSON.stringify(survey),
+             headers: {
+                 "Content-Type": "application/json; charset=UTF-8"
+             }
+         }).then(res => {
+             if (res.status == 200) {
+                 setInfo(infoBox, "Result saved successfully!", "green", "black");
+                 toggleHidden(infoBox, "off");
+             } else {
+                 res.json().then(j => {
+                     setInfo(infoBox, j.error, "red", "grey1");
+                     toggleHidden(infoBox, "off");
+                 })
+             }
+         });
+     });
+
+     document.addEventListener("input", (e) => {
+         if (e.target.type == "range")
+             e.target.nextElementSibling.innerHTML = e.target.value;
+     });
+    </script>
+    <script src="/static/js/helper.js"></script>
+{{end}}

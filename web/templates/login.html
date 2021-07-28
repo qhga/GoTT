@@ -1,0 +1,44 @@
+{{define "body"}}
+    <form id="frm-login" method="post" action="/login">
+        <label for="inp-username">Participant ID:</label>
+        <input id="inp-username" name="username" type="text" value=""/>
+        <label for="inp-password">Password:</label>
+        <input id="inp-password" name="password" type="password" value=""/>
+        <input type="hidden" name="redirectTo" value="{{ .RedirectTo }}" />
+        <button>Login</button>
+    </form>
+    <div class="hidden" id="general-info"></div>
+{{end}}
+{{define "scripts"}}
+    <script>
+     let frm = document.getElementById("frm-login");
+     let infoBox = document.getElementById("general-info");
+
+     frm.addEventListener("submit", e => {
+         e.preventDefault();
+         let fd = new FormData(frm);
+         fetch("/login", {
+             method: "POST",
+             body: new URLSearchParams({
+                 username: fd.get("username"),
+                 password: fd.get("password")
+             }),
+             headers: {
+                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+             }
+
+         }).then(res => {
+             if (res.status == 200) {
+                 window.location = fd.get("redirectTo");
+             } else {
+                 setInfo(infoBox, "Failure", "red", "grey1");
+                 toggleHidden(infoBox, "off");
+                 setTimeout(() => {
+                     toggleHidden(infoBox, "on");
+                 }, 2000);
+             }
+         })
+     })
+    </script>
+    <script src="/static/js/helper.js"></script>
+{{end}}

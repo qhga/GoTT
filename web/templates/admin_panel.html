@@ -1,0 +1,49 @@
+{{define "body"}}
+    <div id="admin-panel" class="container">
+        <button id="reload-texts">Reload texts</button>
+        <button id="update-texts-fre">Update texts FREs</button>
+        <button id="update-tt-fre">Update Typing Test FREs</button>
+        <button id="reload-questions">Reload questions</button>
+        <button id="reload-config">Reload config</button>
+    </div>
+    <div class="hidden" id="general-info"></div>
+    <script>
+     let adminPanel = document.getElementById("admin-panel");
+     let infoBox = document.getElementById("general-info");
+     adminPanel.addEventListener("click", async e => {
+         e.preventDefault();
+         let ele = e.target;
+         let url = "";
+
+         if (ele.id == "reload-texts") {
+             url = "/text";
+         } else if (ele.id == "reload-questions") {
+             url = "/question";
+         } else if (ele.id == "reload-config") {
+             url = "/config";
+         } else if (ele.id == "update-tt-fre") {
+             url = "/test";
+         } else if (ele.id == "update-texts-fre") {
+             url = "/fre";
+         }
+
+         fetch(url, {
+             method: "PATCH",
+         }).then(res => {
+             if (res.status == 200) {
+                 setInfo(infoBox, "Success", "green", "black");
+                 toggleHidden(infoBox, "off");
+             } else {
+                 setInfo(infoBox, "Failure", "red", "grey1");
+                 toggleHidden(infoBox, "off");
+             }
+             setTimeout(() => {
+                 toggleHidden(infoBox, "on");
+             }, 2000);
+         });
+     })
+    </script>
+{{end}}
+{{define "scripts"}}
+    <script src="/static/js/helper.js"></script>
+{{end}}

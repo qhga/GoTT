@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  gott:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    restart: 'no'
+    ports:
+      - 8099:6969
+    volumes:
+      - /srv/gott/configs:CONFIGFOLDER
+      - /srv/gott/web/data:DATAFOLDER
+      - /srv/gott/web/static/fonts:FONTSFOLDER
+
+  mongo:
+    image: mongo
+    restart: 'no'
+    env_file:
+      - /srv/gott/.env
+    ports:
+      - 27017:27017
+    volumes:
+      - /srv/gott/db:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: 'no'
+    ports:
+      - 9099:8081
+    env_file:
+      - /srv/gott/.env

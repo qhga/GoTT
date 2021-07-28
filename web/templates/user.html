@@ -1,0 +1,31 @@
+{{define "body"}}
+<form id="frm-create-user" method="post" action="/user">
+    <label for="username">Username:</label>
+    <input type="text" name="username" />
+    <label for="password">Password:</label>
+    <input type="password" name="password" />
+    <label for="email">E-Mail:</label>
+    <input type="email" name="email" />
+    <button>CREATE NEW PARTICIPANT</button>
+</form>
+    {{if .Mail}}
+    <div id="info-create-user" class="tt-success">
+        <p>User created successfully</p>
+        <p>Email sent to: {{.Mail}}</p>
+    </div>
+    {{else if .UID}}
+    <div id="info-create-user" class="tt-success">
+        <p>User created successfully</p>
+        <table>
+            <tr>
+                <td>UID:</td>
+                <td>{{.UID}}</td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>{{.Pass}}</td>
+            </tr>
+        </table>
+    </div>
+    {{end}}
+{{end}}

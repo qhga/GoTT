@@ -1,0 +1,4 @@
+web/static/fonts/*
+web/data/
+configs/*
+cmd/gott/gott

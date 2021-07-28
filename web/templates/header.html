@@ -1,0 +1,31 @@
+{{define "header"}}
+    <header>
+        <nav>
+            <a href="/">test</a>
+            <div class="dropdown">
+                <a class="dropdown-main">surveys</a>
+                <div class="dropdown-sub">
+                    {{range $k, $v := GetSurveys}}
+                        <a href="/survey?s={{$k}}">{{$k}}</a>
+                    {{end}}
+                </div>
+            </div>
+
+            <a id="logo" href="/"><img src="/inc/logo/logo.svg" alt="" /></a>
+
+            <div class="dropdown">
+                <a class="dropdown-main">extra</a>
+                <div class="dropdown-sub">
+                    <a href="/text">contribute text</a>
+                    <a href="/result">show typing test results</a>
+                    {{- if eq .Role "admin"}}
+                    <a href="/question">add new question</a>
+                    <a href="/user">create new user</a>
+                    <a href="/admin_panel">admin panel</a>
+                    {{end}}
+                </div>
+            </div>
+            <a href="/logout">logout</a>
+        </nav>
+    </header>
+{{end}}

@@ -1,0 +1,21 @@
+{{define "body"}}
+    <form id="frm-contribute-text" method="post" action="/text">
+        <p class="fre-info">Current FRE: <b id="fre">100</b> <i>(higher = easier)</i></p>
+        <p class="fre-info">Current text length: <b id="cc">0</b> <i>(ca. 200 - 300 letters are optimal)</i></p>
+        <br/>
+        <label for="content">Please enter text that is <b>easy</b> to understand:</label>
+        <textarea cols="30" id="ta-content" name="content" rows="5"></textarea>
+        <button>SUBMIT</button>
+        <p class="fre-info tt-warning"><b>Only text with a minimum of 200 letters and FRE > 70 is acceptable!</b></p>
+        <p><b>Example for easy text:</b> Ich esse gerne Kuchen weil der gut schmeckt!</p>
+        <p><b>Example for hard text:</b> Aufgrund des formidablen Geschmackserlebnis, dass Kuchen in meinem Gaumen auslöst, esse ich diesen außerordentlich gerne!</p>
+        <p class="fre-info tt-warning"><b>Please only enter text you have written yourself! Copyright!!</b></p>
+        <p class="fre-info">We currently got <b>{{GetAvailableChars}} / 41000</b> letters...</p>
+    </form>
+    <div class="hidden" id="general-info"></div>
+{{end}}
+
+{{define "scripts"}}
+    <script src="/static/js/text.js"></script>
+    <script src="/static/js/helper.js"></script>
+{{end}}

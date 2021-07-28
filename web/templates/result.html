@@ -1,0 +1,47 @@
+{{define "body"}}
+    <div class="container">
+        {{- if .}}
+            <table id="tbl-results">
+                <thead>
+                    <tr>
+                        <th>TTID</th>
+                        <th>UID</th>
+                        <th>KID</th>
+                        <th>FRE</th>
+                        <th>WPM</th>
+                        <th>CWPM</th>
+                        <th>CER</th>
+                        <th>UER</th>
+                        <th>TER</th>
+                        <th>KSPC</th>
+                        <th>Accuracy</th>
+                        <th>Test Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{- range .}}
+                        <tr>
+                            <th>{{UnwrapOID .TTID}}</th>
+                            <td>{{.UID}}</td>
+                            <td>{{.KID}}</td>
+                            <td>{{.MeanFRE}}</td>
+                            <td>{{.WPM}}</td>
+                            <td>{{.CWPM}}</td>
+                            <td>{{.CER}}</td>
+                            <td>{{.UER}}</td>
+                            <td>{{.TER}}</td>
+                            <td>{{.KSPC}}</td>
+                            <td>{{.Accuracy}} %</td>
+                            <td>{{.TestTime}} s</td>
+                        </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        {{- else}}
+            Nothing to show yet...
+        {{end}}
+    </div>
+{{end}}
+{{define "scripts"}}
+    <script src="/static/js/helper.js"></script>
+{{end}}

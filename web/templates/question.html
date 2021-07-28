@@ -1,0 +1,23 @@
+{{define "body"}}
+    <form id="frm-add-question">
+        <label for="sel-Qtype">Question type:</label>
+        <select id="sel-Qtype" name="Qtype">
+            <option value="{{index .Qtypes 0}}">Radio button</option>
+            <option value="{{index .Qtypes 1}}">Checkbox</option>
+            <option value="{{index .Qtypes 2}}">Textbox</option>
+            <option value="{{index .Qtypes 3}}">Range (Slider)</option>
+        </select>
+        <label for="q-text">Question text:</label>
+        <input type="text" id="q-text" name="Qtext" value="" />
+        <div id="option-container">
+        </div>
+        <button id="btn-submit">SAVE</button>
+    </form>
+
+    <div id="question-preview"></div>
+    <div class="hidden" id="general-info"></div>
+{{end}}
+{{define "scripts"}}
+    <script src="/static/js/question.js"></script>
+    <script src="/static/js/helper.js"></script>
+{{end}}
